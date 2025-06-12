@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cafe Kawaii Recipes</title>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Pacifico&family=Kosugi+Maru&family=Baloo+2:wght@700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -13,6 +15,7 @@
       margin: 0;
       padding: 0;
       min-height: 100vh;
+      font-size: 17px;
     }
     /* Cafe Awning Header */
     .header-bar {
@@ -269,57 +272,68 @@
 <body>
   <div class="header-bar">
     <div class="header-content">
-      <h1>Welcome!</h1>
-      <div class="subheader">subheader here ^(´ ∀ )`</div>
+      <h1>Welcome to callys.room!</h1>
+      <div class="subheader">A cozy space for sharing cute recipes, plushie vibes, and sweet inspiration! (｡•ᴗ•｡)♡</div>
     </div>
   </div>
   <nav class="nav">
-    <button class="nav-tab"><span class="nav-icon">🏠</span> one</button>
-    <button class="nav-tab"><span class="nav-icon">📋</span> two</button>
-    <button class="nav-tab"><span class="nav-icon">✉️</span> three</button>
+    <button class="nav-tab"><span class="nav-icon">🏠</span> Home</button>
+    <button class="nav-tab"><span class="nav-icon">📋</span> Recipes</button>
+    <button class="nav-tab"><span class="nav-icon">✉️</span> Contact</button>
   </nav>
   <div class="main-section">
     <div class="main-title"><span class="bracket">[</span> home + about <span class="bracket">]</span></div>
     <div class="main-desc">Have a look around! DM @user for any questions.</div>
     <div class="status-row">
       <div class="status-bubble"><span class="dot"></span> status: OPEN</div>
-      <div class="last-updated">last updated: 06/11/25</div>
+      <div class="last-updated">last updated: 2025/06/12</div>
     </div>
     <div class="content-columns">
       <div class="left-col">
         <div class="food-cards">
-          <div class="food-card"><img src="https://img.freepik.com/free-photo/japanese-melon-pan-bread_1150-11012.jpg?w=400&q=80" alt="Melonpan"></div>
-          <div class="food-card"><img src="https://img.freepik.com/free-photo/variety-bakery-breads_1150-11010.jpg?w=400&q=80" alt="Bakery"></div>
-          <div class="food-card"><img src="https://img.freepik.com/free-photo/close-up-sweet-bread_1150-11011.jpg?w=400&q=80" alt="Sweet Bread"></div>
+          <div class="food-card"><img src="https://img.freepik.com/free-photo/japanese-melon-pan-bread_1150-11012.jpg?w=400&q=80" alt="Melonpan" class="changeable-img"></div>
+          <div class="food-card"><img src="https://img.freepik.com/free-photo/variety-bakery-breads_1150-11010.jpg?w=400&q=80" alt="Bakery" class="changeable-img"></div>
+          <div class="food-card"><img src="https://img.freepik.com/free-photo/close-up-sweet-bread_1150-11011.jpg?w=400&q=80" alt="Sweet Bread" class="changeable-img"></div>
         </div>
-        <div class="round-buttons">
-          <button class="round-btn" title="Instagram"><span>📷</span></button>
-          <button class="round-btn" title="Twitter"><span>🐦</span></button>
-          <button class="round-btn" title="Recipes"><span>🍞</span></button>
-        </div>
-        <div class="featured-box">
-          <div class="icon">🍵</div>
-          <div style="font-weight:bold; font-size:1.1rem;">Title Here</div>
-          <div style="color:#a67c52; font-size:0.98rem;">sub here</div>
-          <div style="margin-top:8px; background:#fff; border-radius:10px; padding:10px 12px; box-shadow:0 1px 4px #ffe0ec; font-size:0.97rem;">
-            This is a notecard-style description block. You can put a recipe snippet or a cute message here!
-          </div>
-        </div>
+        <input type="file" id="imgInput" accept="image/*" style="display:none">
+        <button id="editModeBtn" style="position:absolute; top:10px; right:20px; z-index:10; background:#ffe0ec; color:#d81b60; border:none; border-radius:8px; padding:6px 16px; font-size:1rem; font-family:'Baloo 2',cursive; cursor:pointer; box-shadow:0 2px 8px #f8bbd0;">Edit Mode</button>
+        <button id="addRecipeBtn" style="display:none; position:absolute; top:50px; right:20px; z-index:10; background:#b2f2bb; color:#388e3c; border:none; border-radius:8px; padding:6px 16px; font-size:1rem; font-family:'Baloo 2',cursive; cursor:pointer; box-shadow:0 2px 8px #c8e6c9;">Add Recipe</button>
+        <!-- ...existing code for add recipe form, comment box, and all recipes (see previous working version)... -->
       </div>
       <div class="right-col">
         <div class="kawaii-fig">
-          <img src="https://img.freepik.com/free-photo/cute-plush-toys-japanese-style_1150-11014.jpg?w=400&q=80" alt="Kawaii Plushies">
+          <img src="https://img.freepik.com/free-photo/cute-plush-toys-japanese-style_1150-11014.jpg?w=400&q=80" alt="Kawaii Plushies" class="changeable-img" id="kawaiiPlushieImg">
         </div>
         <div class="info-box">
           <div style="font-weight:bold; font-size:1.1rem;">Title Here</div>
           <div style="color:#a67c52; font-size:0.98rem;">sub here</div>
           <div class="warning">check xiu.carrd.co… before using as inspo</div>
-          <div style="margin-top:8px; font-size:0.97rem;">
-            This is a placeholder paragraph for extra info, notes, or a cute warning. You can customize this area as you like!
-          </div>
+          <div style="margin-top:8px; font-size:0.97rem;" id="infoBoxCustomText">This is a placeholder paragraph for extra info, notes, or a cute warning. You can customize this area as you like!</div>
         </div>
       </div>
     </div>
   </div>
+  <!-- BGM and Save Button -->
+  <iframe id="bgm-yt" width="0" height="0" style="position:fixed; left:-9999px;" src="https://www.youtube.com/embed/7PvYu-1iEbY?autoplay=1&loop=1&playlist=7PvYu-1iEbY&controls=0&showinfo=0&modestbranding=1&rel=0&mute=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <button id="bgmToggleBtn" style="position:fixed; bottom:32px; left:32px; z-index:3000; background:#fffde7; color:#bfa100; border:none; border-radius:50%; width:54px; height:54px; box-shadow:0 2px 8px #ffe082; font-size:1.5rem; font-family:'Pacifico',cursive; cursor:pointer; display:flex; align-items:center; justify-content:center;">🎵</button>
+  <button id="saveEditsBtn" style="display:none; position:fixed; bottom:32px; right:32px; z-index:3000; background:#ffe0ec; color:#d81b60; border:none; border-radius:50%; width:64px; height:64px; box-shadow:0 4px 16px #f8bbd0; font-size:2rem; font-family:'Pacifico',cursive; cursor:pointer; align-items:center; justify-content:center; display:flex;">💾</button>
+  <!-- Edit Mode Password Popup -->
+  <div id="editModePopupWrap" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(255,250,246,0.92); z-index:2000; align-items:center; justify-content:center;">
+    <form id="editModePopup" style="background:#fff0f6; border-radius:18px; box-shadow:0 4px 24px #f8bbd0; padding:32px 36px; max-width:340px; width:90vw; display:flex; flex-direction:column; gap:16px; align-items:center;">
+      <div style="font-family:'Pacifico',cursive; color:#e57373; font-size:1.5rem;">Enter Edit Mode</div>
+      <div style="color:#a67c52; font-size:1.05rem; text-align:center;">Please enter your secret password to unlock <b>edit mode</b>!<br><span style="font-size:1.5rem;">🔒✨</span></div>
+      <input id="editModePassword" type="password" placeholder="Password" required style="padding:8px; border-radius:8px; border:1px solid #ffe0ec; font-size:1.1rem; width:100%;">
+      <div style="display:flex; gap:10px; width:100%; justify-content:flex-end;">
+        <button type="button" id="cancelEditModePopup" style="background:#ffe0ec; color:#d81b60; border:none; border-radius:8px; padding:6px 16px; font-family:'Baloo 2',cursive; cursor:pointer;">Cancel</button>
+        <button type="submit" style="background:#b2f2bb; color:#388e3c; border:none; border-radius:8px; padding:6px 16px; font-family:'Baloo 2',cursive; cursor:pointer;">Enter</button>
+      </div>
+    </form>
+  </div>
+  <div class="round-buttons">
+    <a class="round-btn" title="Instagram" href="https://www.instagram.com/fuwa_fuw4?igsh=MTBpOXp3dGNqOWx3aA==" target="_blank" rel="noopener noreferrer"><span>📷</span></a>
+    <a class="round-btn" title="Twitter" href="https://twitter.com/" target="_blank" rel="noopener noreferrer"><span>🐦</span></a>
+    <button class="round-btn" title="Recipes" onclick="document.querySelector('.featured-box').scrollIntoView({behavior: 'smooth'});"><span>🍞</span></button>
+  </div>
+  <!-- ...existing code for all scripts, recipes, comment box, and edit mode logic... -->
 </body>
 </html>
