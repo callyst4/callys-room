@@ -267,6 +267,128 @@
       .main-section { padding: 18px 2vw; }
       .content-columns { flex-direction: column; gap: 18px; }
     }
+    @media (max-width: 600px) {
+      body {
+        font-size: 15px;
+        padding: 0;
+      }
+      .main-section {
+        padding: 4vw 2vw 2vw 2vw;
+        border-radius: 10px;
+        margin: 10px 0 0 0;
+        box-shadow: 0 2px 8px #f8bbd0;
+      }
+      .main-title {
+        font-size: 1.1rem;
+        flex-direction: column;
+        gap: 2px;
+        text-align: center;
+      }
+      .main-desc {
+        font-size: 1rem;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      .status-row {
+        flex-direction: column;
+        gap: 6px;
+        align-items: flex-start;
+      }
+      .content-columns {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .left-col, .right-col {
+        min-width: 0;
+        width: 100%;
+        padding: 0;
+      }
+      .food-cards {
+        flex-direction: row;
+        gap: 6px;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+      .food-card {
+        width: 54px;
+        height: 54px;
+      }
+      .food-card img {
+        width: 48px;
+        height: 48px;
+      }
+      .round-buttons {
+        flex-direction: row;
+        gap: 6px;
+        margin-bottom: 8px;
+        justify-content: center;
+      }
+      .round-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+      }
+      .featured-box {
+        padding: 8px 4px 8px 4px;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+      }
+      .featured-box .icon {
+        width: 20px;
+        height: 20px;
+        font-size: 0.9rem;
+        top: -8px;
+        left: -8px;
+      }
+      .kawaii-fig {
+        padding: 8px 0 6px 0;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+      .kawaii-fig img {
+        width: 60px;
+        height: 44px;
+      }
+      .info-box {
+        padding: 8px 4px 6px 4px;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+      }
+      #saveEditsBtn, #bgmToggleBtn {
+        width: 38px !important;
+        height: 38px !important;
+        font-size: 1rem !important;
+        bottom: 10px !important;
+        right: 10px !important;
+        left: 10px !important;
+      }
+      #addRecipeBtn, #editModeBtn {
+        padding: 2px 6px;
+        font-size: 0.9rem;
+        top: 4px;
+        right: 4px;
+      }
+      #addRecipeForm, #editModePopup {
+        padding: 8px 2vw;
+        max-width: 99vw;
+      }
+      .kawaii-comments-box {
+        padding: 6px 2px 6px 2px;
+        border-radius: 8px;
+      }
+      #commentsList {
+        max-height: 70px;
+        font-size: 0.93rem;
+      }
+      input, textarea, button {
+        font-size: 1em !important;
+      }
+      form input, form textarea {
+        padding: 6px 6px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -298,7 +420,268 @@
         <input type="file" id="imgInput" accept="image/*" style="display:none">
         <button id="editModeBtn" style="position:absolute; top:10px; right:20px; z-index:10; background:#ffe0ec; color:#d81b60; border:none; border-radius:8px; padding:6px 16px; font-size:1rem; font-family:'Baloo 2',cursive; cursor:pointer; box-shadow:0 2px 8px #f8bbd0;">Edit Mode</button>
         <button id="addRecipeBtn" style="display:none; position:absolute; top:50px; right:20px; z-index:10; background:#b2f2bb; color:#388e3c; border:none; border-radius:8px; padding:6px 16px; font-size:1rem; font-family:'Baloo 2',cursive; cursor:pointer; box-shadow:0 2px 8px #c8e6c9;">Add Recipe</button>
-        <!-- ...existing code for add recipe form, comment box, and all recipes (see previous working version)... -->
+        <!-- Kawaii Comment/Chat Box -->
+        <div class="kawaii-comments-box" style="background:#fff0f6; border-radius:18px; box-shadow:0 2px 8px #f8bbd0; padding:18px 18px 14px 18px; margin-bottom:24px; font-family:'Kosugi Maru', Arial, sans-serif;">
+          <div style="font-weight:bold; color:#e57373; font-size:1.2rem; display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+            <span style="font-size:1.5rem;">💬</span> Kawaii Guestbook & Chat
+          </div>
+          <div id="commentsList" style="max-height:180px; overflow-y:auto; background:#fff; border-radius:10px; padding:10px 12px; margin-bottom:10px; box-shadow:0 1px 4px #ffe0ec; font-size:1rem;"></div>
+          <form id="commentForm" style="display:flex; gap:8px; align-items:flex-end;">
+            <input id="commentName" type="text" maxlength="16" placeholder="Your name" required style="flex:1; padding:6px 10px; border-radius:8px; border:1px solid #ffe0ec; font-size:1rem;">
+            <input id="commentText" type="text" maxlength="120" placeholder="Leave a cute message... (｡•ᴗ•｡)♡" required style="flex:2; padding:6px 10px; border-radius:8px; border:1px solid #ffe0ec; font-size:1rem;">
+            <button type="submit" style="background:#b2f2bb; color:#388e3c; border:none; border-radius:8px; padding:6px 16px; font-family:'Baloo 2',cursive; font-size:1rem; cursor:pointer; box-shadow:0 2px 8px #c8e6c9;">Send</button>
+          </form>
+        </div>
+        <!-- Featured Recipe Boxes (restore all your recipes here) -->
+        <div class="featured-box">
+          <div class="icon">🍵</div>
+          <div style="font-weight:bold; font-size:1.1rem;">Matcha Melonpan</div>
+          <div style="color:#a67c52; font-size:0.98rem;">Soft & sweet Japanese bread with a matcha cookie crust</div>
+          <div style="margin-top:8px; background:#fff; border-radius:10px; padding:10px 12px; box-shadow:0 1px 4px #ffe0ec; font-size:0.97rem;">
+            <b>Ingredients:</b><br>
+            <ul style="margin:6px 0 8px 18px;">
+              <li>2 cups bread flour</li>
+              <li>2 tbsp sugar</li>
+              <li>1 tsp instant yeast</li>
+              <li>1/2 cup milk</li>
+              <li>2 tbsp butter</li>
+              <li>1 egg</li>
+              <li>Pinch of salt</li>
+              <li>For cookie crust: 1/2 cup flour, 2 tbsp sugar, 2 tbsp butter, 1 tsp matcha powder</li>
+            </ul>
+            <b>Steps:</b><br>
+            <ol style="margin:6px 0 8px 18px;">
+              <li>Mix bread ingredients, knead, and let rise 1 hour.</li>
+              <li>Mix cookie crust, roll flat, and cut circles.</li>
+              <li>Shape dough into balls, cover with cookie crust, and score.</li>
+              <li>Bake at 170°C (340°F) for 15-18 min. Enjoy with tea! 🍵</li>
+            </ol>
+            <span style="color:#d81b60; font-size:1.1em;">Kawaii tip: Draw a smiley face with chocolate for extra cuteness! (｡•ᴗ•｡)♡</span>
+          </div>
+        </div>
+        <div class="featured-box" style="background:#ffe0ec;">
+          <div class="icon" style="background:#fffde7; color:#bfa100;">🍓</div>
+          <div style="font-weight:bold; font-size:1.1rem;">Strawberry Shortcake</div>
+          <div style="color:#a67c52; font-size:0.98rem;">Fluffy sponge, whipped cream, and fresh strawberries</div>
+          <div style="margin-top:8px; background:#fff; border-radius:10px; padding:10px 12px; box-shadow:0 1px 4px #ffe0ec; font-size:0.97rem;">
+            <b>Ingredients:</b><br>
+            <ul style="margin:6px 0 8px 18px;">
+              <li>3 eggs</li>
+              <li>1/2 cup sugar</li>
+              <li>3/4 cup cake flour</li>
+              <li>2 tbsp milk</li>
+              <li>1 cup heavy cream</li>
+              <li>2 tbsp powdered sugar</li>
+              <li>Fresh strawberries 🍓</li>
+            </ul>
+            <b>Steps:</b><br>
+            <ol style="margin:6px 0 8px 18px;">
+              <li>Whisk eggs & sugar until fluffy. Fold in flour & milk.</li>
+              <li>Bake in a round pan at 170°C (340°F) for 20 min.</li>
+              <li>Whip cream with sugar. Slice cake, layer with cream & strawberries.</li>
+              <li>Decorate with extra strawberries and a cute mint leaf! (´｡• ᵕ •｡`)</li>
+            </ol>
+            <span style="color:#d81b60; font-size:1.1em;">Kawaii tip: Use heart-shaped strawberries for extra love! ♡</span>
+          </div>
+        </div>
+        <div class="featured-box" style="background:#e0f7fa;">
+          <div class="icon" style="background:#ffe0ec; color:#d81b60;">🍞</div>
+          <div style="font-weight:bold; font-size:1.1rem;">Kawaii Milk Bread</div>
+          <div style="color:#a67c52; font-size:0.98rem;">Super soft, fluffy, and perfect for cute sandwiches</div>
+          <div style="margin-top:8px; background:#fff; border-radius:10px; padding:10px 12px; box-shadow:0 1px 4px #b2ebf2; font-size:0.97rem;">
+            <b>Ingredients:</b><br>
+            <ul style="margin:6px 0 8px 18px;">
+              <li>2 1/2 cups bread flour</li>
+              <li>3 tbsp sugar</li>
+              <li>2 tsp instant yeast</li>
+              <li>1/2 cup milk</li>
+              <li>1/4 cup heavy cream</li>
+              <li>1 egg</li>
+              <li>2 tbsp butter</li>
+              <li>Pinch of salt</li>
+            </ul>
+            <b>Steps:</b><br>
+            <ol style="margin:6px 0 8px 18px;">
+              <li>Mix all ingredients, knead until smooth, let rise 1 hour.</li>
+              <li>Shape into a loaf or cute rolls. Let rise again 30 min.</li>
+              <li>Bake at 175°C (350°F) for 25 min. Brush with butter!</li>
+              <li>Draw faces with chocolate or jam for kawaii sandwiches! (≧◡≦)</li>
+            </ol>
+            <span style="color:#d81b60; font-size:1.1em;">Kawaii tip: Use cookie cutters for animal shapes!</span>
+          </div>
+        </div>
+        <div class="featured-box" style="background:#f3e8ff;">
+          <div class="icon" style="background:#fff0f6; color:#a67c52;">🥢</div>
+          <div style="font-weight:bold; font-size:1.1rem;">Tahu Isi Sayuran Renyah</div>
+          <div style="color:#a67c52; font-size:0.98rem;">Tahu goreng kopong berisi sayuran, super renyah dan gurih!</div>
+          <div style="margin-top:8px; background:#fff; border-radius:10px; padding:10px 12px; box-shadow:0 1px 4px #f3e8ff; font-size:0.97rem;">
+            <b>Bahan-bahan:</b><br>
+            <ul style="margin:6px 0 8px 18px;">
+              <li><b>A. Bahan Utama:</b></li>
+              <li>10 buah tahu pong (tahu goreng kopong), belah satu sisi tanpa putus</li>
+              <li>Minyak goreng secukupnya</li>
+              <li><b>B. Bahan Isian Sayuran:</b></li>
+              <li>100 gram wortel, serut halus</li>
+              <li>100 gram kol, iris tipis</li>
+              <li>50 gram tauge</li>
+              <li>2 batang daun bawang, iris halus</li>
+              <li>2 siung bawang putih, cincang halus</li>
+              <li>1 sdm saus tiram (opsional)</li>
+              <li>1 sdt garam</li>
+              <li>1/2 sdt merica bubuk</li>
+              <li>1/2 sdt kaldu bubuk (opsional)</li>
+              <li>1 sdm minyak untuk menumis</li>
+              <li><b>C. Bahan Adonan Pencelup (Crispy):</b></li>
+              <li>150 gram tepung terigu serbaguna</li>
+              <li>50 gram tepung beras</li>
+              <li>1 sdt baking powder (opsional)</li>
+              <li>1 sdt garam</li>
+              <li>1/2 sdt merica bubuk</li>
+              <li>1/2 sdt kaldu bubuk</li>
+              <li>200-250 ml air</li>
+            </ul>
+            <b>Cara Membuat:</b><br>
+            <ol style="margin:6px 0 8px 18px;">
+              <li><b>Membuat Isian Tahu:</b> Tumis bawang putih hingga harum, masukkan wortel & kol, tumis hingga sedikit layu. Tambahkan tauge, bumbu, dan daun bawang. Angkat & dinginkan.</li>
+              <li><b>Mengisi Tahu:</b> Isi tahu pong dengan tumisan sayur, jangan terlalu padat.</li>
+              <li><b>Adonan Pencelup:</b> Campur semua bahan kering, tuang air sedikit demi sedikit hingga adonan licin dan pas kekentalannya.</li>
+              <li><b>Menggoreng:</b> Celup tahu isi ke adonan, goreng dalam minyak panas hingga kuning keemasan dan renyah. Tiriskan.</li>
+              <li><b>Penyajian:</b> Nikmati selagi hangat dengan cabai rawit atau saus favoritmu! 🌶️✨</li>
+            </ol>
+            <span style="color:#d81b60; font-size:1.1em;">Kawaii tip: Tambahkan irisan wortel bentuk bunga atau daun bawang bentuk hati di isian, makin lucu dan sehat! (✿◕‿◕✿)</span>
+          </div>
+        </div>
+        <div class="featured-box" style="background:#fffde7;">
+          <div class="icon" style="background:#ffe0ec; color:#d81b60;">🍜</div>
+          <div style="font-weight:bold; font-size:1.1rem;">Mie Ayam Simpel dan Enak</div>
+          <div style="color:#a67c52; font-size:0.98rem;">Mie ayam gurih dengan topping ayam dan kuah kaldu kaya rasa!</div>
+          <div style="margin-top:8px; background:#fff; border-radius:10px; padding:10px 12px; box-shadow:0 1px 4px #ffe0ec; font-size:0.97rem;">
+            <b>Bahan-bahan:</b><br>
+            <ul style="margin:6px 0 8px 18px;">
+              <li><b>A. Bahan Utama:</b></li>
+              <li>500 gram mie telur basah</li>
+              <li>200 gram sawi hijau, potong-potong</li>
+              <li>Air untuk merebus mie dan sawi</li>
+              <li>Bawang goreng & daun bawang untuk taburan (opsional)</li>
+              <li><b>B. Bahan Topping Ayam:</b></li>
+              <li>300 gram ayam fillet, potong dadu kecil</li>
+              <li>2 lembar daun salam</li>
+              <li>2 batang serai, memarkan</li>
+              <li>1 sdt garam</li>
+              <li>1 sdt gula pasir</li>
+              <li>1 sdm kecap asin</li>
+              <li>3 sdm kecap manis</li>
+              <li>1/2 sdt merica bubuk</li>
+              <li>1/2 sdt kaldu bubuk</li>
+              <li>500 ml air</li>
+              <li>2 sdm minyak goreng</li>
+              <li><b>C. Bumbu Halus Topping Ayam:</b></li>
+              <li>6 siung bawang merah</li>
+              <li>4 siung bawang putih</li>
+              <li>2 cm jahe</li>
+              <li>2 cm kunyit, bakar sebentar (opsional)</li>
+              <li>3 butir kemiri, sangrai</li>
+              <li>1/2 sdt ketumbar bubuk</li>
+              <li><b>D. Bahan Minyak Ayam:</b></li>
+              <li>100 ml kulit/lemak ayam</li>
+              <li>3 siung bawang putih, cincang kasar</li>
+              <li>50 ml minyak sayur</li>
+              <li><b>E. Bahan Kuah Kaldu:</b></li>
+              <li>Tulang ayam</li>
+              <li>1.5 liter air</li>
+              <li>1 batang daun bawang (putihnya saja)</li>
+              <li>1/2 sdt garam</li>
+              <li>1/4 sdt merica bubuk</li>
+              <li>1/2 sdt kaldu bubuk</li>
+            </ul>
+            <b>Cara Membuat:</b><br>
+            <ol style="margin:6px 0 8px 18px;">
+              <li><b>Minyak Ayam:</b> Masak kulit ayam hingga keluar minyak, angkat kulit. Goreng bawang putih hingga keemasan, campur dengan minyak ayam. Sisihkan.</li>
+              <li><b>Topping Ayam:</b> Haluskan bumbu, tumis dengan daun salam & serai. Masukkan ayam, aduk rata. Tambahkan air, bumbu, kecap, masak hingga ayam empuk & kuah mengental.</li>
+              <li><b>Kuah Kaldu:</b> Rebus tulang ayam, daun bawang, dan bumbu hingga harum. Saring kaldu.</li>
+              <li><b>Mie & Sawi:</b> Rebus sawi & mie hingga matang, tiriskan.</li>
+              <li><b>Penyajian:</b> Taruh minyak ayam di mangkuk, masukkan mie, aduk rata. Tambahkan sawi, topping ayam, siram kuah, taburi bawang goreng & daun bawang. Sajikan hangat! 🍜</li>
+            </ol>
+            <span style="color:#d81b60; font-size:1.1em;">Kawaii tip: Sajikan dengan mangkuk warna pastel & sendok lucu biar makin gemes! (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧</span>
+          </div>
+        </div>
+        <div class="featured-box" style="background:#e0f7fa;">
+          <div class="icon" style="background:#fffde7; color:#bfa100;">🥕</div>
+          <div style="font-weight:bold; font-size:1.1rem;">Bakwan Sayur Renyah dan Enak</div>
+          <div style="color:#a67c52; font-size:0.98rem;">Bakwan sayur super renyah, cocok untuk camilan atau lauk!</div>
+          <div style="margin-top:8px; background:#fff; border-radius:10px; padding:10px 12px; box-shadow:0 1px 4px #b2ebf2; font-size:0.97rem;">
+            <b>Bahan-bahan:</b><br>
+            <ul style="margin:6px 0 8px 18px;">
+              <li><b>A. Bahan Utama:</b></li>
+              <li>100 gram kol, iris tipis</li>
+              <li>1 buah wortel, serut kasar</li>
+              <li>50 gram tauge</li>
+              <li>2 batang daun bawang, iris halus</li>
+              <li>Minyak goreng secukupnya</li>
+              <li><b>B. Bahan Adonan Tepung:</b></li>
+              <li>150 gram tepung terigu serbaguna</li>
+              <li>50 gram tepung beras</li>
+              <li>1/2 sdt baking powder (opsional)</li>
+              <li>1/2 sdt garam</li>
+              <li>1/4 sdt merica bubuk</li>
+              <li>1/2 sdt kaldu bubuk</li>
+              <li>250-300 ml air es</li>
+              <li><b>C. Bumbu Halus:</b></li>
+              <li>3 siung bawang putih</li>
+              <li>2 butir kemiri, sangrai</li>
+              <li>1/2 sdt ketumbar bubuk</li>
+            </ul>
+            <b>Cara Membuat:</b><br>
+            <ol style="margin:6px 0 8px 18px;">
+              <li>Haluskan bumbu halus. Campur semua bahan kering, masukkan bumbu halus, tuang air es sedikit demi sedikit hingga adonan licin.</li>
+              <li>Masukkan kol, wortel, tauge, dan daun bawang ke adonan. Aduk rata.</li>
+              <li>Panaskan minyak banyak, goreng adonan bakwan satu sendok demi satu hingga kuning keemasan dan renyah. Tiriskan.</li>
+              <li>Sajikan bakwan selagi hangat dengan cabai rawit atau saus favorit!</li>
+            </ol>
+            <span style="color:#d81b60; font-size:1.1em;">Kawaii tip: Bentuk bakwan bulat pipih dan sajikan di piring motif bunga biar makin imut! (｡♥‿♥｡)</span>
+          </div>
+        </div>
+        <div class="featured-box" style="background:#ffe0ec;">
+          <div class="icon" style="background:#e0f7fa; color:#d81b60;">🍜</div>
+          <div style="font-weight:bold; font-size:1.1rem;">Biang Biang Noodles (Mie Biang Biang)</div>
+          <div style="color:#a67c52; font-size:0.98rem;">Mie lebar khas Tiongkok dengan bumbu aromatik dan saus gurih, seru dan menantang untuk dibuat!</div>
+          <div style="margin-top:8px; background:#fff; border-radius:10px; padding:10px 12px; box-shadow:0 1px 4px #ffe0ec; font-size:0.97rem;">
+            <b>Bahan-bahan:</b><br>
+            <ul style="margin:6px 0 8px 18px;">
+              <li><b>A. Bahan Adonan Mie:</b></li>
+              <li>300 gram tepung terigu protein tinggi</li>
+              <li>160 ml air hangat</li>
+              <li>1/2 sdt garam</li>
+              <li>2 sdm minyak sayur (untuk merendam adonan)</li>
+              <li><b>B. Bahan Bumbu Aromatik:</b></li>
+              <li>2-3 siung bawang putih, cincang halus</li>
+              <li>2-3 batang daun bawang, iris tipis (putih & hijau dipisah)</li>
+              <li>1-2 sdm cabai bubuk kasar</li>
+              <li>1/2 sdt Sichuan peppercorns (opsional)</li>
+              <li>3-4 sdm minyak sayur (untuk disiram panas)</li>
+              <li><b>C. Bahan Saus Pelengkap:</b></li>
+              <li>2 sdm kecap asin</li>
+              <li>1 sdm cuka hitam Tiongkok</li>
+              <li>1 sdt gula pasir</li>
+              <li>1/2 sdt garam (opsional)</li>
+              <li>1/2 sdt kaldu bubuk (opsional)</li>
+              <li>1-2 sdm air hangat</li>
+              <li><b>D. Bahan Pelengkap Lainnya:</b></li>
+              <li>Bok choy/sayuran hijau, rebus sebentar</li>
+              <li>Telur rebus (opsional)</li>
+              <li>Ayam/daging sapi cincang tumis (opsional)</li>
+            </ul>
+            <b>Cara Membuat:</b><br>
+            <ol style="margin:6px 0 8px 18px;">
+              <li><b>Membuat Adonan Mie:</b> Campur tepung & garam, tuang air hangat sedikit demi sedikit, uleni hingga halus & elastis. Bagi adonan, bulatkan, olesi minyak, tutup & diamkan 1-3 jam.</li>
+              <li><b>Menyiapkan Bumbu & Saus:</b> Campur bawang putih, daun bawang putih, cabai bubuk, Sichuan peppercorns di mangkuk. Campur semua bahan saus pelengkap di mangkuk lain, aduk rata.</li>
+              <li><b>Membentuk Mie:</b> Pipihkan adonan, tekan tengahnya dengan sumpit, tarik perlahan hingga panjang & lebar, lalu belah mengikuti garis sumpit.</li>
+              <li><b>Merebus Mie & Penyajian:</b> Rebus mie hingga matang, tiriskan. Rebus juga sayuran. Tata saus di mangkuk, letakkan mie, sayur, dan topping. Taburi bumbu aromatik di atas mie.</li>
+              <li>Panaskan minyak hingga berasap, siramkan ke bumbu aromatik (akan mendesis!). Taburi daun bawang hijau, aduk rata sebelum disantap.</li>
+            </ol>
+            <span style="color:#d81b60; font-size:1.1em;">Kawaii tip: Sajikan mie di mangkuk besar warna pastel, tambahkan telur rebus setengah matang & taburan wijen untuk tampilan super lucu! (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧</span>
+          </div>
+        </div>
       </div>
       <div class="right-col">
         <div class="kawaii-fig">
@@ -334,6 +717,195 @@
     <a class="round-btn" title="Twitter" href="https://twitter.com/" target="_blank" rel="noopener noreferrer"><span>🐦</span></a>
     <button class="round-btn" title="Recipes" onclick="document.querySelector('.featured-box').scrollIntoView({behavior: 'smooth'});"><span>🍞</span></button>
   </div>
-  <!-- ...existing code for all scripts, recipes, comment box, and edit mode logic... -->
+  <script>
+    // --- Kawaii Recipe App Interactive Features ---
+    // Firebase config (already initialized above)
+    // --- DOM Elements ---
+    const editModeBtn = document.getElementById('editModeBtn');
+    const addRecipeBtn = document.getElementById('addRecipeBtn');
+    const saveEditsBtn = document.getElementById('saveEditsBtn');
+    const imgInput = document.getElementById('imgInput');
+    const bgmBtn = document.getElementById('bgmToggleBtn');
+    const bgmYT = document.getElementById('bgm-yt');
+    const editModePopupWrap = document.getElementById('editModePopupWrap');
+    const editModePopup = document.getElementById('editModePopup');
+    const editModePassword = document.getElementById('editModePassword');
+    const cancelEditModePopup = document.getElementById('cancelEditModePopup');
+    const commentsList = document.getElementById('commentsList');
+    const commentForm = document.getElementById('commentForm');
+    const commentName = document.getElementById('commentName');
+    const commentText = document.getElementById('commentText');
+    // --- State ---
+    let editMode = false;
+    let editSession = false;
+    let editPassword = 'kawaii2025'; // Change as needed
+    let editableEls = [];
+    let changeableImgs = [];
+    // --- Helper Functions ---
+    function setEditable(state) {
+      editableEls.forEach(el => el.contentEditable = state);
+      changeableImgs.forEach(img => img.style.cursor = state ? 'pointer' : '');
+      if (state) {
+        addRecipeBtn.style.display = 'block';
+        saveEditsBtn.style.display = 'flex';
+      } else {
+        addRecipeBtn.style.display = 'none';
+        saveEditsBtn.style.display = 'none';
+      }
+    }
+    function getEditableContent() {
+      return editableEls.map(el => el.innerHTML);
+    }
+    function setEditableContent(data) {
+      data.forEach((val, i) => { if (editableEls[i]) editableEls[i].innerHTML = val; });
+    }
+    function getImageSources() {
+      return changeableImgs.map(img => img.src);
+    }
+    function setImageSources(srcs) {
+      srcs.forEach((src, i) => { if (changeableImgs[i]) changeableImgs[i].src = src; });
+    }
+    // --- Edit Mode Logic ---
+    function showEditPopup() {
+      editModePopupWrap.style.display = 'flex';
+      editModePassword.value = '';
+      editModePassword.focus();
+    }
+    function hideEditPopup() {
+      editModePopupWrap.style.display = 'none';
+    }
+    editModeBtn.onclick = () => {
+      if (editSession) {
+        enableEditMode();
+        return;
+      }
+      showEditPopup();
+    };
+    cancelEditModePopup.onclick = hideEditPopup;
+    editModePopup.onsubmit = e => {
+      e.preventDefault();
+      if (editModePassword.value === editPassword) {
+        editSession = true;
+        hideEditPopup();
+        enableEditMode();
+      } else {
+        alert('Wrong password! (｡•́︿•̀｡)');
+      }
+    };
+    function enableEditMode() {
+      editMode = true;
+      setEditable(true);
+    }
+    function disableEditMode() {
+      editMode = false;
+      setEditable(false);
+    }
+    saveEditsBtn.onclick = () => {
+      // Save all editable content and images to Firebase
+      const content = getEditableContent();
+      const images = getImageSources();
+      db.ref('siteContent').set({ content, images, lastUpdated: new Date().toISOString() });
+      disableEditMode();
+    };
+    // --- Editable Elements Setup ---
+    function setupEditables() {
+      // Main editable text: main-desc, info box, all featured recipes
+      editableEls = [
+        document.querySelector('.main-desc'),
+        document.querySelector('.info-box > div[style*="font-weight:bold"]'),
+        document.querySelector('.info-box > div[style*="color:#a67c52"]'),
+        document.getElementById('infoBoxCustomText'),
+        ...Array.from(document.querySelectorAll('.featured-box'))
+      ];
+      changeableImgs = Array.from(document.querySelectorAll('.changeable-img'));
+      // Image click to change
+      changeableImgs.forEach((img, idx) => {
+        img.onclick = () => {
+          if (!editMode) return;
+          imgInput.onchange = e => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = ev => {
+              img.src = ev.target.result;
+              // Save immediately to Firebase for real-time sync
+              const images = getImageSources();
+              db.ref('siteContent/images').set(images);
+            };
+            reader.readAsDataURL(file);
+          };
+          imgInput.click();
+        };
+      });
+    }
+    // --- Real-time Sync from Firebase ---
+    db.ref('siteContent').on('value', snap => {
+      const val = snap.val();
+      if (!val) return;
+      setEditableContent(val.content || []);
+      setImageSources(val.images || []);
+      if (val.lastUpdated) {
+        const lastUpd = document.querySelector('.last-updated');
+        if (lastUpd) lastUpd.textContent = 'last updated: ' + val.lastUpdated.slice(0,10);
+      }
+    });
+    // --- Add Recipe Feature ---
+    addRecipeBtn.onclick = () => {
+      if (!editMode) return;
+      const title = prompt('Recipe title? (e.g. Kawaii Pancakes)');
+      if (!title) return;
+      const desc = prompt('Short description?');
+      if (desc === null) return;
+      const content = prompt('Ingredients & steps (HTML allowed, e.g. <ul><li>...</li></ul>)');
+      if (content === null) return;
+      const box = document.createElement('div');
+      box.className = 'featured-box';
+      box.innerHTML = `<div class="icon" style="background:#ffe0ec; color:#d81b60;">🍰</div>
+        <div style="font-weight:bold; font-size:1.1rem;">${title}</div>
+        <div style="color:#a67c52; font-size:0.98rem;">${desc}</div>
+        <div style="margin-top:8px; background:#fff; border-radius:10px; padding:10px 12px; box-shadow:0 1px 4px #ffe0ec; font-size:0.97rem;">${content}</div>`;
+      document.querySelector('.left-col').appendChild(box);
+      setupEditables();
+      // Save to Firebase
+      const allContent = getEditableContent();
+      db.ref('siteContent/content').set(allContent);
+    };
+    // --- BGM Toggle ---
+    let bgmMuted = false;
+    bgmBtn.onclick = () => {
+      bgmMuted = !bgmMuted;
+      bgmYT.contentWindow.postMessage(JSON.stringify({ event: 'command', func: bgmMuted ? 'mute' : 'unMute' }), '*');
+      bgmBtn.textContent = bgmMuted ? '🔇' : '🎵';
+    };
+    // --- Guestbook/Comment Box (Firebase real-time) ---
+    function renderComments(comments) {
+      commentsList.innerHTML = '';
+      if (!comments) return;
+      Object.values(comments).forEach(c => {
+        const div = document.createElement('div');
+        div.style.marginBottom = '6px';
+        div.innerHTML = `<b style='color:#e57373;'>${c.name}:</b> <span>${c.text}</span> <span style='color:#bfa100; font-size:0.9em;'>${c.time || ''}</span>`;
+        commentsList.appendChild(div);
+      });
+      commentsList.scrollTop = commentsList.scrollHeight;
+    }
+    db.ref('guestbook').on('value', snap => {
+      renderComments(snap.val());
+    });
+    commentForm.onsubmit = e => {
+      e.preventDefault();
+      const name = commentName.value.trim() || 'anon';
+      const text = commentText.value.trim();
+      if (!text) return;
+      const time = new Date().toLocaleString();
+      db.ref('guestbook').push({ name, text, time });
+      commentText.value = '';
+    };
+    // --- Initial Setup ---
+    window.onload = () => {
+      setupEditables();
+      setEditable(false);
+    };
+  </script>
 </body>
 </html>
